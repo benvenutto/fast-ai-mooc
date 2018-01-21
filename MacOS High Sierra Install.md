@@ -94,7 +94,12 @@ Next install the latest NVIDIA CUDA toolkit from the
 Lastly, install NVIDIA [DNN](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html).
 Register on the developer program and follow the donwload links until you see thenoption to download
 [cuDNN v7.0.5 Library for OSX](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v7.0.5/prod/9.1_20171129/cudnn-9.1-osx-x64-v7-ga)
-which corresponds to CUDA 9.1.
+which corresponds to CUDA 9.1. Follow the instructions to copy files into then
+CUDA directories, and add the CUDA libraries to the dynamic library path in `~./bash_profile`:
+
+'
+export LD_LIBRARY_PATH=/usr/local/cuda/lib
+'
 
 Have a look at how to enable eGPU support for NVIDIA cards on this
 [page here](https://egpu.io/forums/mac-setup/wip-nvidia-egpu-support-for-high-sierra/).
