@@ -59,4 +59,10 @@ And after installing Keras change the config as described [here](http://wiki.fas
 
 # Enabling eGPU support
 
-Install Theano GPU dependencies.
+The hardware and OS configuration I am testing against is:
+
+* MacBook Pro 13" early 2015, 2.9 Ghz i5, 16 GB
+* MacOS High Sierra 10.13.2 (build 17C205)
+* Akitio Node eGPU enclosure, TunderBolt 3
+* EVGA GeForce GTX 1070 Ti SC GAMING Black Ed. ACX 3.0 8GB GDDR5
+* Apple TH3 - TH2 bi-directional adapter
