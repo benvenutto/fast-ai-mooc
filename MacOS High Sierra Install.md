@@ -113,6 +113,12 @@ conda install Theano pygpu
 pip install pycuda scikit-cuda
 `
 
+Now test the GPU support:
+
+`
+DEVICE=cuda python -c "import pygpu;pygpu.test()"
+`
+
 Now configure Theano to use the CUDA toolkit, by adding the following lines
 to the Theano config file in `~/.theanorc`:
 
