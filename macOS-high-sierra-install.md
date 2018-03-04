@@ -40,7 +40,7 @@ conda create --name fastai-cpu
 source activate fastai-cpu
 ~~~~
 
-Next install the Intel processor optimisations for Python 3,
+Next install the Intel processor optimisations for Python 3 into the current environment,
 as explained [here](https://software.intel.com/en-us/articles/using-intel-distribution-for-python-with-anaconda).
 
 ~~~~
@@ -48,8 +48,8 @@ conda install --channel intel intelpython3_core python=3
 ~~~~
 
 Having installed the Intel optimisations we clone this environment, to create the
-environment that includes GPU support, as any CPU optimisations will also be useful there.
-The fast.ai environment with GPU support is called *fastai*.
+foundation for the environment that includes GPU support, as any CPU optimisations
+will also be useful there. The fast.ai environment with GPU support is called *fastai*.
 
 ~~~~
 conda create --name fastai --clone fastai-cpu
@@ -63,7 +63,58 @@ git clone https://github.com/fastai/fastai.git
 cd fastai
 ~~~~
 
-Now refresh the environment with the CPU only library configuration:
+Now update this environment with the CPU only library configuration:
 
 ~~~~
+conda env update -f environment-cpu.yml
+~~~~
+
+# CPU Validation
+
+Before going further lets validate that out local CPU configuration is working.
+It's a good idea to copy the original course notebooks into a new working directory
+where we can save them, in case we ever need to get back to the originals.
+Start Jupiter notebook in the courses directory.
+
+~~~~
+cd ..
+mkdir working-notebooks
+cd working-notebooks
+cp -R ../fastai/courses/dl1/* .
+jupyter notebook
+~~~~
+
+Select the lesson one `lesson1.ipynb` notebook. Now follow the instructions to
+create the data files; you will first need to open another terminal windows and
+cd to the `working-notebooks` directory you previously created. Then run themcommand below to download and unzip the data directories, this will take a few minutes.
+
+~~~~
+mkdir data
+cd data
+curl -O http://files.fast.ai/data/dogscats.zip
+unzip dogscats.zip
+~~~~
+
+
+
+# GPU installation
+
+Pytorch on macOS currently doesn't have a standard build that includes CUDA support.
+I won't go into the details of why (!) Apple currently has such poor support for
+NVIDIA GPUs and hence CUDA, however it is possible to get NVIDIA cards working on a Mac.
+The next step is then to create a Pytorch build [from source](https://github.com/pytorch/pytorch#from-source).
+
+~~~~
+export CMAKE_PREFIX_PATH=[anaconda root directory]
+conda install numpy pyyaml setuptools cmake cffi typing
+~~~~
+
+The directory `[anaconda root directory]` above is the directory anaconda is installed in.
+Unless you chose an alternative directory in the installer, by default it will be under
+your home directory, specifically in `~/anaconda3`.
+
+Now cd into an appropriate directory, and pull down the Pytorch sources from [github](https://github.com/pytorch).
+
+~~~~
+git clone --recursive https://github.com/pytorch/pytorch
 ~~~~
