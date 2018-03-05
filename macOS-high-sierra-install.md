@@ -116,10 +116,29 @@ First switch environments.
 source activate fastai
 ~~~~
 
+If you haven't already installed CUDA, you can do so from the [cuda toolkit download page](https://developer.nvidia.com/cuda-downloads?target_os=MacOSX&target_arch=x86_64&target_version=1013&target_type=dmglocal).
+
+Please make sure that CUDA has been installed as per the instructions on the NVIDIA
+[CUDA installation page](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html).
+
+Also, check that `/usr/local/cuda` exists, as pytorch setup checks for it. If required
+run the command `sudo ln -n -s /Developer/NVIDIA/CUDA-9.1/ /usr/local/cuda`
+(assumes your CUDA installation version is 9.1).
+
+Then install CUDNN from the [CUDNN download page](https://developer.nvidia.com/rdp/cudnn-download).
+The latest version currently available for macOS is 7.0.5. To install CUDNN unpack
+the downloaded compressed tar file, and then run the following commands.
+
+~~~~
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib/libcudnn* /usr/local/cuda/lib
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib/libcudnn*
+~~~~
+
 The next step is then to create a Pytorch build [from source](https://github.com/pytorch/pytorch#from-source).
 
 ~~~~
-export CMAKE_PREFIX_PATH=`which conda`
+export CMAKE_PREFIX_PATH=[directory conda is in, default is ~/anaconda3]
 conda install numpy pyyaml setuptools cmake cffi typing
 ~~~~
 
@@ -134,13 +153,6 @@ cd pytorch
 And next run the Pytorch install. At this point you want your GPU discoverable,
 so that the build optimises for it! So plug in and power up your eGPU enclosure.
 
-Please make sure that CUDA has been installed as per the instructions on the NVIDIA
-[CUDA installation page](http://docs.nvidia.com/cuda/cuda-installation-guide-mac-os-x/index.html).
-
-Also, check that `/usr/local/cuda` exists, as the make checks for it. If required
-run the command `sudo ln -n -s /Developer/NVIDIA/CUDA-9.1/ /usr/local/cuda`
-(assumes your CUDA installation version is 9.1).
-
 Finally, check that you have the XCode command line tools installed, you can download
 the package from here: [Command Line Tools macOS 10.13 for Xcode 9.2](https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_macOS_10.13_for_Xcode_9.2/Command_Line_Tools_macOS_10.13_for_Xcode_9.2.dmg).
 
@@ -150,24 +162,12 @@ Now run the Pytorch build script, this can easily take 20 minutes or more.
 MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py install
 ~~~~
 
-Then install the Pytorch packages:
-
-~~~~
-conda install pytorch torchvision -c pytorch
-~~~~
-
 Now update this environment with the default (i.e.: GPU) library configuration.
 However first you need to comment out the reference to cuda90 in the `environment.yml`
 file, so that that line reads `  #- cuda90`.
 
 ~~~~
 conda env update -f environment.yml
-~~~~
-
-The install the 9.1 version of the CUDA toolkit.
-
-~~~~
-conda install -c numba cudatoolkit
 ~~~~
 
 # GPU Validation
