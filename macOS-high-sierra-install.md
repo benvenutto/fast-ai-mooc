@@ -138,7 +138,11 @@ sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib/libcudnn*
 The next step is then to create a Pytorch build [from source](https://github.com/pytorch/pytorch#from-source).
 
 ~~~~
+<<<<<<< HEAD
 export CMAKE_PREFIX_PATH=[directory conda is in, default is ~/anaconda3]
+=======
+export CMAKE_PREFIX_PATH=`which conda`
+>>>>>>> b2ffb33acd1aeab1033b4e66d7d524aea21030a0
 conda install numpy pyyaml setuptools cmake cffi typing
 ~~~~
 
@@ -162,6 +166,15 @@ Now run the Pytorch build script, this can easily take 20 minutes or more.
 MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py install
 ~~~~
 
+<<<<<<< HEAD
+=======
+Then install the Pytorch packages:
+
+~~~~
+conda install pytorch torchvision -c pytorch
+~~~~
+
+>>>>>>> b2ffb33acd1aeab1033b4e66d7d524aea21030a0
 Now update this environment with the default (i.e.: GPU) library configuration.
 However first you need to comment out the reference to cuda90 in the `environment.yml`
 file, so that that line reads `  #- cuda90`.
@@ -170,6 +183,15 @@ file, so that that line reads `  #- cuda90`.
 conda env update -f environment.yml
 ~~~~
 
+<<<<<<< HEAD
+=======
+The install the 9.1 version of the CUDA toolkit.
+
+~~~~
+conda install -c numba cudatoolkit
+~~~~
+
+>>>>>>> b2ffb33acd1aeab1033b4e66d7d524aea21030a0
 # GPU Validation
 
 Having installed Pytorch GPU support, lets validate that it is working.
