@@ -79,7 +79,8 @@ cd fastai
 jupyter notebook
 ~~~~
 
-Select the lesson one `lesson1.ipynb` notebook, in the `courses/dl1` directory.
+In the corresponding browser window that opens as the Jupyter notebook client,
+select the lesson one `lesson1.ipynb` notebook, in the `courses/dl1` directory.
 Now follow the instructions to create the data files; run the commands below to
 download and unzip the data directories, this will take a few minutes.
 
@@ -91,8 +92,17 @@ curl -O http://files.fast.ai/data/dogscats.zip
 unzip dogscats.zip
 ~~~~
 
-Now if you run through the notebook,
+Now if you run through the notebook, the section we are interested in is the section entitled
+"our first model: quick start". Remember, in Jupyter notebook, Shift Enter will run
+the current cell, so you should work your way down from the top of the notebook,
+until you reach this section. Having downloaded the pre-computed model, the first
+time you run it, the next time it will apply the model to the image set you downloaded.
 
+Here is a screenshot taken, using CPU-only computation, 20% into the first of three epochs:
+
+![20% in epoch 1](img/Screen Shot - CPU.png)
+
+One epoch would have taken around 70 minutes to complete (so over 3 hours for all 3 epochs).
 
 # GPU installation
 
@@ -109,13 +119,9 @@ source activate fastai
 The next step is then to create a Pytorch build [from source](https://github.com/pytorch/pytorch#from-source).
 
 ~~~~
-export CMAKE_PREFIX_PATH=[anaconda root directory]
+export CMAKE_PREFIX_PATH=`which conda`
 conda install numpy pyyaml setuptools cmake cffi typing
 ~~~~
-
-The directory `[anaconda root directory]` above is the directory anaconda is installed in.
-Unless you chose an alternative directory in the installer, by default it will be under
-your home directory, specifically in `~/anaconda3`.
 
 Now cd into an appropriate directory, and pull down the Pytorch sources from [github](https://github.com/pytorch)
 and cd into the Pytorch directory.
@@ -138,6 +144,43 @@ run the command `sudo ln -n -s /Developer/NVIDIA/CUDA-9.1/ /usr/local/cuda`
 Finally, check that you have the XCode command line tools installed, you can download
 the package from here: [Command Line Tools macOS 10.13 for Xcode 9.2](https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_macOS_10.13_for_Xcode_9.2/Command_Line_Tools_macOS_10.13_for_Xcode_9.2.dmg).
 
+Now run the Pytorch build script, this can easily take 20 minutes or more.
+
 ~~~~
 MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py install
 ~~~~
+
+Then install the Pytorch packages:
+
+~~~~
+conda install pytorch torchvision -c pytorch
+~~~~
+
+Now update this environment with the default (i.e.: GPU) library configuration.
+However first you need to comment out the reference to cuda90 in the `environment.yml`
+file, so that that line reads `  #- cuda90`.
+
+~~~~
+conda env update -f environment.yml
+~~~~
+
+The install the 9.1 version of the CUDA toolkit.
+
+~~~~
+conda install -c numba cudatoolkit
+~~~~
+
+# GPU Validation
+
+Having installed Pytorch GPU support, lets validate that it is working.
+Start a new terminal window, cd into the `fastai` directory, and run Jupiter notebook.
+
+~~~~
+cd fastai
+jupyter notebook
+~~~~
+
+In the corresponding browser window that opens as the Jupyter notebook client,
+select the lesson one `lesson1.ipynb` notebook, in the `courses/dl1` directory.
+
+Again we will use the section entitled "our first model: quick start" as a benchmark.
