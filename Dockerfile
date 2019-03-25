@@ -1,6 +1,6 @@
 FROM nvcr.io/nvidia/pytorch:19.03-py3 AS pytorch
 
-WORKDIR /workspace/home
+WORKDIR /Developer/Docker/workspace
 
 RUN conda install -c conda-forge libjpeg-turbo && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
