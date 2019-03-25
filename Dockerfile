@@ -12,4 +12,4 @@ RUN conda install -c conda-forge libjpeg-turbo && \
 
 EXPOSE 8888
 
-ENTRYPOINT jupyter notebook --allow-root --ip='*' --port=8888
+ENTRYPOINT jupyter notebook --allow-root --ip='0.0.0.0' --port=8888
