@@ -10,6 +10,8 @@ RUN conda install -c conda-forge libjpeg-turbo && \
     (cd fastai; tools/run-after-git-clone; pip install -e ".[dev]") && \
     conda install -c conda-forge jupyter_contrib_nbextensions
 
+CMD jupyter notebook password
+
 EXPOSE 8888
 
-ENTRYPOINT jupyter notebook --allow-root --ip='0.0.0.0' --port=8888
+ENTRYPOINT jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser
