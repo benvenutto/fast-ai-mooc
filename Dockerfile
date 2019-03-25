@@ -4,4 +4,5 @@ RUN conda install -c pytorch -c fastai fastai && \
 	conda uninstall --force jpeg libtiff -y && \
     conda install -c conda-forge libjpeg-turbo && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd
-ENTRYPOINT jupyter notebook
+EXPOSE 8888
+ENTRYPOINT jupyter notebook --ip=0.0.0.0 --port=8888
