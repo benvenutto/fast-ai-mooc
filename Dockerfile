@@ -12,6 +12,8 @@ RUN conda install -c conda-forge libjpeg-turbo && \
 
 CMD jupyter notebook password
 
+WORKDIR /Developer
+
 EXPOSE 8888
 
 ENTRYPOINT jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser
