@@ -1,6 +1,6 @@
 FROM nvcr.io/nvidia/pytorch:19.03-py3 AS pytorch
 
-WORKDIR /Developer/Docker/workspace
+WORKDIR /Docker/workdir
 
 RUN conda install -c conda-forge libjpeg-turbo && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
@@ -10,9 +10,9 @@ RUN conda install -c conda-forge libjpeg-turbo && \
     (cd fastai; tools/run-after-git-clone; pip install -e ".[dev]") && \
     conda install -c conda-forge jupyter_contrib_nbextensions
 
-CMD jupyter notebook password
+WORKDIR /Docker
 
-WORKDIR /Developer
+CMD jupyter notebook password
 
 EXPOSE 8888
 
