@@ -16,4 +16,7 @@ CMD jupyter notebook password
 
 EXPOSE 8888
 
-ENTRYPOINT jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser
+ENTRYPOINT \
+	sudo nvidia-smi -pm ENABLED -i 0 && \
+	sudo nvidia-smi -pl 217 -i 0 && \
+	jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser
