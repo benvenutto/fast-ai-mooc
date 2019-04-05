@@ -12,11 +12,10 @@ RUN conda install -c conda-forge libjpeg-turbo && \
 
 WORKDIR /Docker
 
-CMD jupyter notebook password
-
 EXPOSE 8888
 
 ENTRYPOINT \
 	sudo nvidia-smi -pm ENABLED -i 0 && \
 	sudo nvidia-smi -pl 217 -i 0 && \
 	jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser
+
