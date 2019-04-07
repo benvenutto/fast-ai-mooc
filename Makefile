@@ -2,9 +2,7 @@
 
 DOCKER ?= docker
 
-all:
-	prod
-	dev
+all: prod dev
 
 prod:
 	$(DOCKER) build -t "nvidia/pytorch/fastai:19.03-py3" -f Dockerfile .
