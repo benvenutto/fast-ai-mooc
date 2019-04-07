@@ -6,7 +6,7 @@ RUN conda install -c conda-forge libjpeg-turbo && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
     git clone https://github.com/pytorch/vision && \
     (cd vision; python setup.py install) && \
-    git clone https://github.com/fastai/fastai && \
+    cd /home/simonb/Developer/Fastai && \
     (cd fastai; tools/run-after-git-clone; pip install -e ".[dev]") && \
     conda install -c conda-forge jupyter_contrib_nbextensions
 
