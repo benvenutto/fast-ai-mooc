@@ -15,7 +15,7 @@ WORKDIR /Docker
 EXPOSE 8888
 
 ENTRYPOINT \
-	sudo nvidia-smi -pm ENABLED -i 0 && \
-	sudo nvidia-smi -pl 217 -i 0 && \
+	nvidia-smi -pm ENABLED -i 0 && \
+	nvidia-smi -pl 217 -i 0 && \
 	python -m fastai.utils.show_install && \
 	jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser 2>&1 
