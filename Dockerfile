@@ -2,12 +2,11 @@ FROM nvcr.io/nvidia/pytorch:19.06-py3 AS pytorch
 
 WORKDIR /Docker/workdir
 
-RUN conda install -c conda-forge libjpeg-turbo && \
+RUN conda update conda-build && \
+	conda install pytorch torchvision cudatoolkit=10.0 -c pytorch && \
+	conda uninstall --force jpeg libtiff -y && \
+    conda install -c conda-forge libjpeg-turbo && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
-    git clone https://github.com/pytorch/vision && \
-    (cd vision; python setup.py install) && \
-    git clone https://github.com/fastai/fastai && \
-    (cd fastai; tools/run-after-git-clone; pip install -e ".[dev]") && \
     conda install -c conda-forge jupyter_contrib_nbextensions
 
 WORKDIR /Docker
