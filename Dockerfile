@@ -2,8 +2,6 @@ FROM nvcr.io/nvidia/pytorch:19.06-py3 AS pytorch
 
 WORKDIR /Docker/workdir
 
-RUN pip install tensorflow_gpu
-
 RUN conda install -c conda-forge tensorflow && \
 	conda install -c fastai fastai && \
 	conda uninstall --force jpeg libtiff -y && \
