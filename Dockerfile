@@ -3,6 +3,7 @@ FROM nvcr.io/nvidia/pytorch:19.06-py3 AS pytorch
 WORKDIR /Docker/workdir
 
 RUN conda create --name fastai python=3.7 && \
+	conda activate fastai && \
 	conda install -c fastai fastai && \
 	conda uninstall --force jpeg libtiff -y && \
     conda install -c conda-forge libjpeg-turbo && \
