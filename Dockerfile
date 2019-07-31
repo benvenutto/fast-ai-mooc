@@ -6,8 +6,7 @@ RUN conda install -c fastai fastai && \
 	conda uninstall --force jpeg libtiff -y && \
     conda install -c conda-forge libjpeg-turbo && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
-    conda install -c conda-forge jupyter_contrib_nbextensions && \
- 	conda install -c conda-forge tensorflow
+    conda install -c conda-forge jupyter_contrib_nbextensions
 
 WORKDIR /Docker
 
