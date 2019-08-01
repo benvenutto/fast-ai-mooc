@@ -2,7 +2,7 @@ FROM nvcr.io/nvidia/pytorch:19.07-py3 AS pytorch
 
 WORKDIR /Docker/workdir
 
-RUN conda install -c fastai fastai pytorch && \
+RUN conda install -c fastai fastai && \
     conda uninstall --force jpeg libtiff -y && \
     CC="cc -mavx2" pip install -U --force-reinstall pillow-simd && \
     conda install -c conda-forge jupyter_contrib_nbextensions
