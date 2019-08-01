@@ -5,8 +5,7 @@ WORKDIR /Docker/workdir
 RUN conda install -c anaconda python=3.7 && \
     conda install -c fastai fastai && \
     conda uninstall --force jpeg libtiff -y && \
-    conda install -c conda-forge libjpeg-turbo && \
-    CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
+    CC="cc -mavx2" pip install -U --force-reinstall pillow-simd && \
     conda install -c conda-forge jupyter_contrib_nbextensions
 
 WORKDIR /Docker
