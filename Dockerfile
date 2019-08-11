@@ -10,7 +10,6 @@ WORKDIR /Docker
 
 EXPOSE 8888
 
-ENTRYPOINT \
-	nvidia-smi  -q -i 0 -d POWER && \
-	python -m fastai.utils.show_install && \
-	jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser 2>&1 
+CMD ["nvidia-smi" , "-q", "-i", "0", "-d", "POWER"]
+CMD ["python", "-m", "fastai.utils.show_install"]
+CMD ["jupyter", "notebook", "--allow-root", "--ip='0.0.0.0'", "--port=8888", "--no-browser"]
