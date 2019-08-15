@@ -5,6 +5,7 @@ WORKDIR /Docker/workdir
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 RUN pip install fastai && \
+	pip install albumentations && \
     CC="cc -mavx2" pip install -U --force-reinstall pillow-simd && \
     conda install -c conda-forge jupyter_contrib_nbextensions
 
