@@ -4,6 +4,8 @@ WORKDIR /Docker/workdir
 
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
+COPY jupyter_notebook_config.py /root/.jupyter
+
 RUN pip install fastai && \
 	pip install albumentations && \
 	pip install workalendar && \
@@ -15,4 +17,4 @@ WORKDIR /Docker
 EXPOSE 8888
 
 CMD ["sh","-c", \
-	"nvidia-smi -pm ENABLED -i 0 && nvidia-smi -pl 300 -i 0 && jupyter notebook password && jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser"]
+	"nvidia-smi -pm ENABLED -i 0 && nvidia-smi -pl 300 -i 0 && jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser"]
