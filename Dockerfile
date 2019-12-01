@@ -12,7 +12,7 @@ RUN conda install -c conda-forge jupyter_contrib_nbextensions && \
     conda install -c conda-forge jupyter_contrib_nbextensions && \
     conda install -c conda-forge albumentations && \
     conda install -c conda-forge workalendar && \
-    pip uninstall pillow && \
+    pip uninstall -y pillow && \
     CC="cc -mavx2" pip install -U --force-reinstall pillow-simd
 
 WORKDIR /Docker
