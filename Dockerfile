@@ -9,10 +9,11 @@ COPY jupyter_notebook_config.py /root/.jupyter
 RUN conda install -c conda-forge jupyter_contrib_nbextensions && \
     pip install ipywidgets && \
     jupyter nbextension enable --py widgetsnbextension && \
-    pip install fastai && \
-    pip install albumentations && \
-    pip install workalendar && \
-    CC="cc -mavx2" pip install -U --force-reinstall pillow-simd && \
+    conda install -c conda-forge jupyter_contrib_nbextensions && \
+    conda install -c conda-forge albumentations && \
+    conda install -c conda-forge workalendar && \
+    pip uninstall pillow && \
+    CC="cc -mavx2" pip install -U --force-reinstall pillow-simd
 
 WORKDIR /Docker
 
