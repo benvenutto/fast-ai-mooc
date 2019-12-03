@@ -6,14 +6,15 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 COPY jupyter_notebook_config.py /root/.jupyter
 
-RUN pip install jupyter_contrib_nbextensions && \
+RUN pip install fastai && \
+    pip install jupyter_contrib_nbextensions && \
     pip install ipywidgets && \
     jupyter nbextension enable --py widgetsnbextension && \
+    conda uninstall --force jpeg libtiff -y && \
+    conda install -c conda-forge libjpeg-turbo pillow==6.0.0 && \
+    CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
     pip install albumentations && \
-    pip install workalendar && \
-    pip uninstall -y pillow && \
-    CC="cc -mavx2" pip install -U --force-reinstall pillow-simd && \
-    pip install fastai
+    pip install workalendar
 
 WORKDIR /Docker
 
