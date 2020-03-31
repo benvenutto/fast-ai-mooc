@@ -6,7 +6,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 COPY jupyter_notebook_config.py /root/.jupyter
 
-RUN pip install torchaudio && \
+RUN pip install av && \
+    pip install torchaudio && \
     pip install fastai && \
     pip install jupyter_contrib_nbextensions && \
     pip install ipywidgets && \
