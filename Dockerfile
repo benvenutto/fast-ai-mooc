@@ -6,7 +6,9 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 COPY jupyter_notebook_config.py /root/.jupyter
 
-RUN pip install fastai && \
+RUN conda install av -c conda-forge && \
+    conda install -c pytorch torchaudio && \
+    conda install -c pytorch -c fastai fastai && \
     pip install jupyter_contrib_nbextensions && \
     pip install ipywidgets && \
     jupyter nbextension enable --py widgetsnbextension && \
