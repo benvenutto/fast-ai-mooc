@@ -2,7 +2,7 @@
 
 DOCKER ?= docker
 
-all: prod dev
+all: prod ### dev
 
 prod:
 	$(DOCKER) build --pull -t "nvidia/pytorch/fastai:20.06-py3" -f Dockerfile .
