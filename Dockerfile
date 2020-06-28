@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/pytorch:20.03-py3 AS pytorch
+FROM nvcr.io/nvidia/pytorch:20.06-py3 AS pytorch
 
 WORKDIR /Docker/workdir
 
