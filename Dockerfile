@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/pytorch:20.06-py3 AS pytorch
+FROM nvcr.io/nvidia/pytorch:20.07-py3 AS pytorch
 
 WORKDIR /Docker/workdir
 
@@ -8,6 +8,7 @@ COPY jupyter_notebook_config.py /root/.jupyter
 
 RUN conda install av -c conda-forge && \
 #    conda install -c pytorch torchaudio && \
+    pip install fastai \
     pip install jupyter_contrib_nbextensions && \
     pip install ipywidgets && \
     jupyter nbextension enable --py widgetsnbextension && \
