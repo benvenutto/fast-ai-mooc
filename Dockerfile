@@ -19,7 +19,7 @@ WORKDIR /Docker
 
 EXPOSE 8888
 
-CMD nvidia-smi -pm ENABLED -i 0 2>&1
-CMD nvidia-smi -pl 300 -i 0 2>&1
-CMD nvidia-smi -q -i 0 -d POWER 2>&1
-CMD jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser 2>&1
+CMD nvidia-smi -pm ENABLED -i 0 \
+    && nvidia-smi -pl 300 -i 0 \
+    && nvidia-smi -q -i 0 -d POWER \
+    && jupyter notebook --allow-root --ip='0.0.0.0' --port=8888 --no-browser 2>&1
