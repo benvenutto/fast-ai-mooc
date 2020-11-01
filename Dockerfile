@@ -13,7 +13,8 @@ RUN conda install av -c conda-forge && \
     jupyter nbextension enable --py widgetsnbextension && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
     pip install albumentations && \
-    pip install workalendar
+    pip install workalendar && \
+    pip install tweepy
 
 WORKDIR /Docker
 
