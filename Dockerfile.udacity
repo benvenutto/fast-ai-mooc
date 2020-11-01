@@ -1,0 +1,20 @@
+FROM nvcr.io/nvidia/pytorch:20.09-py3 AS pytorch
+
+WORKDIR /Docker/workdir
+
+ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
+
+COPY jupyter_notebook_config.py /root/.jupyter
+
+RUN conda update -n base -c defaults conda && \
+    conda update -n base --all && \
+    pip install tweepy
+
+WORKDIR /Docker
+
+EXPOSE 8080
+
+CMD nvidia-smi -pm ENABLED -i 0 && \
+    nvidia-smi -pl 300 -i 0 && \
+    nvidia-smi -q -i 0 -d POWER && \
+    jupyter notebook --allow-root --ip='0.0.0.0' --port=8080 --no-browser 2>&1
