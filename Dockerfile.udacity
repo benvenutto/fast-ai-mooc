@@ -8,6 +8,10 @@ COPY jupyter_notebook_config.py /root/.jupyter
 
 RUN conda update -n base -c defaults conda && \
     conda update -n base --all && \
+    pip install jupyter_contrib_nbextensions && \
+    pip install ipywidgets && \
+    jupyter nbextension enable --py widgetsnbextension && \
+    CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
     pip install tweepy
 
 WORKDIR /Docker
