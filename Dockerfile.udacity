@@ -7,7 +7,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 COPY jupyter_notebook_config.py /root/.jupyter
 
 RUN apt-get update && \
-    apt-get install -y texlive pandoc && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y texlive-xetex texlive-fonts-recommended texlive-generic-recommended && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y pandoc && \
     conda install -c anaconda pandas && \
     conda update -n base -c defaults conda && \
     conda update -n base --all && \
