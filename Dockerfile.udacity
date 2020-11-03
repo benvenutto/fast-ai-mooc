@@ -6,7 +6,9 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 COPY jupyter_notebook_config.py /root/.jupyter
 
-RUN conda install -c anaconda pandas && \
+RUN apt-get update && \
+    apt-get install -y texlive pandoc && \
+    conda install -c anaconda pandas && \
     conda update -n base -c defaults conda && \
     conda update -n base --all && \
     pip install jupyter_contrib_nbextensions && \
