@@ -5,6 +5,7 @@ WORKDIR /Docker/workdir
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 COPY jupyter_notebook_config.py /root/.jupyter
+COPY .kaggle /root/
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y texlive-xetex texlive-fonts-recommended texlive-generic-recommended && \
