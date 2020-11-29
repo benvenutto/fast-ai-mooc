@@ -12,6 +12,7 @@ RUN conda install av -c conda-forge && \
     pip install ipywidgets && \
     jupyter nbextension enable --py widgetsnbextension && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
+    pip install psycopg2 && \
     pip install albumentations && \
     pip install workalendar && \
     pip install tweepy
