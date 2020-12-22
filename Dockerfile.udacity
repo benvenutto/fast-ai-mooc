@@ -22,8 +22,7 @@ RUN apt-get update && \
     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
     pip install psycopg2 && \
     pip install tweepy && \
-    pip install kaggle && \
-    pip install albumentations
+    pip install ipython-sql
 
 WORKDIR /Docker
 
