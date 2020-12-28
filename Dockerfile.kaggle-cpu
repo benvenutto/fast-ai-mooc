@@ -2,7 +2,7 @@ FROM gcr.io/kaggle-images/python AS kaggle-cpu
 
 WORKDIR /Docker/workdir
 
-olCOPY jupyter_notebook_config.py /root/.jupyter
+COPY jupyter_notebook_config.py /root/.jupyter
 
 RUN conda install av -c conda-forge && \
     conda install --no-deps -c fastai -c anaconda fastai gh anaconda && \
