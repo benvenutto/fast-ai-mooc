@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/pytorch:20.09-py3 AS pytorch
+FROM nvcr.io/nvidia/pytorch:21.10-py3 AS pytorch
 
 WORKDIR /Docker/workdir
 
@@ -6,15 +6,15 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,utility"
 
 COPY jupyter_notebook_config.py /root/.jupyter
 
-RUN conda install av -c conda-forge && \
-    conda install --no-deps -c fastai -c anaconda fastai gh anaconda && \
-    pip install jupyter_contrib_nbextensions && \
-    pip install ipywidgets && \
-    jupyter nbextension enable --py widgetsnbextension && \
-    CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
-    pip install albumentations && \
-    pip install workalendar && \
-    pip install tweepy
+# RUN conda install av -c conda-forge && \
+#     conda install --no-deps -c fastai -c anaconda fastai gh anaconda && \
+#     pip install jupyter_contrib_nbextensions && \
+#     pip install ipywidgets && \
+#     jupyter nbextension enable --py widgetsnbextension && \
+#     CC="cc -mavx2" pip install --no-cache-dir -U --force-reinstall --no-binary :all: --compile pillow-simd && \
+#     pip install albumentations && \
+#     pip install workalendar && \
+#     pip install tweepy
 
 WORKDIR /Docker
 
